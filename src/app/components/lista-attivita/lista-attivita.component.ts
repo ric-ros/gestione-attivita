@@ -8,11 +8,12 @@ import { CestinoComponent } from '../cestino/cestino.component';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
+import { ElapsedTimePipe } from "../../pipes/elapsed-time.pipe";
 
 @Component({
   selector: 'app-lista-attivita',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, DettagliAttivitaComponent, CestinoComponent],
+  imports: [CommonModule, FormsModule, RouterModule, DettagliAttivitaComponent, CestinoComponent, ElapsedTimePipe],
   templateUrl: './lista-attivita.component.html',
   styleUrls: ['./lista-attivita.component.scss']
 })

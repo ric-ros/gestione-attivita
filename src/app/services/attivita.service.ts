@@ -8,7 +8,7 @@ import { Attivita } from '../models/attivita.model';
 export class AttivitaService {
   private attivitaSubject = new BehaviorSubject<Attivita[]>(this.caricaAttivita());
   attivita$: Observable<Attivita[]> = this.attivitaSubject.asObservable();
-  private nextId = this.attivitaSubject.value.length ? Math.max(...this.attivitaSubject.value.map(a => a.id)) + 1 : 1;
+  private nextId = this.attivitaSubject.value.reduce((max, a) => a.id > max ? a.id : max, 0) + 1;
 
   private salvaAttivita(attivita: Attivita[]): void {
     localStorage.setItem('attivita', JSON.stringify(attivita));
@@ -21,6 +21,7 @@ export class AttivitaService {
 
   aggiungiAttivita(attivita: Attivita): void {
     attivita.id = this.nextId++;
+    attivita.creatoIl = new Date();
     attivita.cancellato = false;
     const attivitaCorrenti = [...this.attivitaSubject.value, attivita];
     this.attivitaSubject.next(attivitaCorrenti);

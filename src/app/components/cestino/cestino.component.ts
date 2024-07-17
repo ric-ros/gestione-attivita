@@ -5,12 +5,13 @@ import { AttivitaService } from '../../services/attivita.service';
 import { Attivita } from '../../models/attivita.model';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ElapsedTimePipe } from "../../pipes/elapsed-time.pipe";
 
 
 @Component({
   selector: 'app-cestino',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ElapsedTimePipe],
   templateUrl: './cestino.component.html'
 })
 export class CestinoComponent {
