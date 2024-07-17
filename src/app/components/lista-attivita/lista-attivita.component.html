@@ -13,8 +13,8 @@
     <li *ngFor="let attivita of attivitaFiltrate$ | async" (click)="apriDettagli(attivita)"
       [class.completata]="attivita.completato" class="item">
       <div class="item-details">
-        <span class="attivita-titolo">{{ attivita.titolo }}</span>
-        <span class="attivita-descrizione">{{ attivita.descrizione }}</span>
+        <span class="item-titolo">{{ attivita.titolo }}</span>
+        <span class="item-descrizione">{{ attivita.descrizione }}</span>
       </div>
       <div class="actions-container">
         <button (click)="cambiaStato(attivita, $event)" class="btn btn-action">
@@ -30,7 +30,10 @@
   <app-dettagli-attivita *ngIf="attivitaSelezionata" [attivita]="attivitaSelezionata" (chiudiModal)="chiudiModal()"
     (salvaModifiche)="salvaModifiche($event)"></app-dettagli-attivita>
 
-  <div *ngIf="anyAttivitaCancellate$ | async" class="link-cestino">
-    <a routerLink="/cestino" class="btn">Cestino attività</a>
+  <div *ngIf="(anyAttivitaCancellate$ | async) && !mostraSoltantoNonCompletate" class="actions-container">
+    <a routerLink="/cestino" class="btn btn-default">Cestino attività</a>
+  </div>
+  <div *ngIf="mostraSoltantoNonCompletate" class="actions-container">
+    <a routerLink="/lista-attivita" class="btn btn-default">Mostra tutte le attività</a>
   </div>
 </div>

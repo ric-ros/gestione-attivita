@@ -5,9 +5,12 @@
     </button>
     <h2>Cestino</h2>
   </div>
+  <div class="filter-bar">
+    <input (input)="onKeywordChange($event)" placeholder="Cerca..." class="filter-input" />
+  </div>
   <ul class="list">
-    <li *ngIf="!(cestino$ | async)?.length">Nessuna attività nel cestino</li>
-    <li *ngFor="let attivita of cestino$ | async" class="item">
+    <li *ngIf="!(attivitaCancellate$ | async)?.length">Nessuna attività nel cestino</li>
+    <li *ngFor="let attivita of attivitaCancellate$ | async" class="item">
       <div class="item-details">
         <span class="attivita-titolo">{{ attivita.titolo }}</span>
         <span class="attivita-descrizione">{{ attivita.descrizione }}</span>

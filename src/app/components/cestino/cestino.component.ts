@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AttivitaService } from '../../services/attivita.service';
 import { Attivita } from '../../models/attivita.model';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-cestino',
@@ -13,13 +14,24 @@ import { map } from 'rxjs/operators';
   templateUrl: './cestino.component.html'
 })
 export class CestinoComponent {
-  cestino$: Observable<Attivita[]>;
+  keyword$ = new BehaviorSubject<string>('');
 
-  constructor(private attivitaService: AttivitaService, private router: Router) {
-    this.cestino$ = this.attivitaService.attivita$.pipe(
-      map(attivita => attivita.filter(a => a.cancellato))
-    );
-  }
+  attivitaCancellate$: Observable<Attivita[]> = combineLatest([
+    this.attivitaService.attivita$,
+    this.keyword$
+  ]).pipe(
+    map(([attivita, keyword]) => attivita.filter(a => {
+      const matchKeyword = !(!!keyword) || a.descrizione.includes(keyword.toLowerCase()) || a.titolo.includes(keyword.toLowerCase());
+
+      return matchKeyword && a.cancellato;
+    }))
+  );
+
+  anyAttivitaCancellate$: Observable<boolean> = this.attivitaService.attivita$.pipe(
+    map(attivita => attivita.some(a => a.cancellato))
+  );
+
+  constructor(private attivitaService: AttivitaService, private router: Router) { }
 
   recuperaAttivita(id: number): void {
     this.attivitaService.recuperaAttivita(id);
@@ -31,5 +43,10 @@ export class CestinoComponent {
 
   tornaIndietro(): void {
     this.router.navigate(['/lista-attivita']);
+  }
+
+  onKeywordChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.keyword$.next(input.value);
   }
 }

@@ -13,7 +13,8 @@ import { RouterModule } from '@angular/router';
   selector: 'app-lista-attivita',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule, DettagliAttivitaComponent, CestinoComponent],
-  templateUrl: './lista-attivita.component.html'
+  templateUrl: './lista-attivita.component.html',
+  styleUrls: ['./lista-attivita.component.scss']
 })
 export class ListaAttivitaComponent {
   @Input() mostraSoltantoNonCompletate: boolean = false;
@@ -37,7 +38,7 @@ export class ListaAttivitaComponent {
 
   filtraAttivita(attivita: Attivita[], filtroStato: boolean | undefined, keyword: string): Attivita[] {
     return attivita.filter(a => {
-      const matchKeyword = !(!!keyword) || a.descrizione.includes(keyword.toLowerCase());
+      const matchKeyword = !(!!keyword) || a.descrizione.includes(keyword.toLowerCase()) || a.titolo.includes(keyword.toLowerCase());
       const matchStato = filtroStato === undefined || a.completato === filtroStato;
 
       return matchKeyword && matchStato && !a.cancellato && (!this.mostraSoltantoNonCompletate || !a.completato);

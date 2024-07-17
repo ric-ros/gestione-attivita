@@ -16,7 +16,13 @@ export class QuickInsertComponent {
 
   constructor(private attivitaService: AttivitaService) { }
 
-  onSubmit() {
+  onSubmit(form: HTMLFormElement) {
+    // Sarebbe il caso di usare Reactive Forms, ma per semplicità usiamo il metodo nativo
+    if (form.checkValidity() === false) {
+      form.reportValidity();
+      return
+    }
+
     if (!this.nuovaAttivita.titolo) {
       return;
     }
@@ -25,6 +31,7 @@ export class QuickInsertComponent {
       ...this.nuovaAttivita,
       id: 0  // ID verrà generato dal service
     } as Attivita;
+
     this.attivitaService.aggiungiAttivita(nuovaAttivitaCompleta);
     this.nuovaAttivita = { titolo: '', descrizione: '', completato: false };
   }
