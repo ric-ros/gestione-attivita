@@ -1,0 +1,15 @@
+<div class="quick-insert">
+  <h2 class="component-header">Inserisci Nuova Attività</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="titolo">Titolo:</label>
+      <input type="text" id="titolo" [(ngModel)]="nuovaAttivita.titolo" name="titolo" required>
+    </div>
+    <div class="form-group">
+      <label for="descrizione">Descrizione:</label>
+      <textarea id="descrizione" [(ngModel)]="nuovaAttivita.descrizione" name="descrizione" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-action" [disabled]="!nuovaAttivita.titolo"
+      [title]="!nuovaAttivita.titolo ? 'Inserisci un titolo' : ''">Aggiungi Attività</button>
+  </form>
+</div>

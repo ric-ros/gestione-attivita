@@ -1,0 +1,36 @@
+<div class="lista-attivita">
+  <h2 class="component-header">Lista delle Attività {{ mostraSoltantoNonCompletate ? 'Non Completate' : '' }}</h2>
+  <div class="filter-bar" *ngIf="!mostraSoltantoNonCompletate">
+    <input (input)="onKeywordChange($event)" placeholder="Cerca..." class="filter-input" />
+    <select (change)="onStatoChange($event)" class="filter-select">
+      <option value="">Tutte</option>
+      <option value="true">Completate</option>
+      <option value="false">Non completate</option>
+    </select>
+  </div>
+  <ul class="list">
+    <li *ngIf="!(attivitaFiltrate$ | async)?.length" class="attivita-empty">Nessuna attività</li>
+    <li *ngFor="let attivita of attivitaFiltrate$ | async" (click)="apriDettagli(attivita)"
+      [class.completata]="attivita.completato" class="item">
+      <div class="item-details">
+        <span class="attivita-titolo">{{ attivita.titolo }}</span>
+        <span class="attivita-descrizione">{{ attivita.descrizione }}</span>
+      </div>
+      <div class="actions-container">
+        <button (click)="cambiaStato(attivita, $event)" class="btn btn-action">
+          {{ attivita.completato ? 'Segna come non completato' : 'Segna come completato' }}
+        </button>
+        <button (click)="rimuoviAttivita(attivita.id, $event)" class="btn btn-danger">
+          Rimuovi
+        </button>
+      </div>
+    </li>
+  </ul>
+
+  <app-dettagli-attivita *ngIf="attivitaSelezionata" [attivita]="attivitaSelezionata" (chiudiModal)="chiudiModal()"
+    (salvaModifiche)="salvaModifiche($event)"></app-dettagli-attivita>
+
+  <div *ngIf="anyAttivitaCancellate$ | async" class="link-cestino">
+    <a routerLink="/cestino" class="btn">Cestino attività</a>
+  </div>
+</div>

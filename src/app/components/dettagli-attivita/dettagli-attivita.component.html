@@ -1,0 +1,27 @@
+<div class="dettagli-attivita-modal">
+  <div class="dettagli-attivita-content">
+    <div class="modal-title">
+      <h2>Dettagli Attività</h2>
+      <button (click)="onClose()" class="btn">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+    <form (ngSubmit)="onSave()" class="form-content">
+      <div class="form-group">
+        <label for="titolo">Titolo</label>
+        <input type="text" id="titolo" [(ngModel)]="titolo" name="titolo" required>
+      </div>
+      <div class="form-group">
+        <label for="descrizione">Descrizione</label>
+        <textarea id="descrizione" [(ngModel)]="descrizione" name="descrizione" required></textarea>
+      </div>
+      <div class="actions-container">
+        <button type="button" (click)="toggleCompletato()" class="btn btn-action">
+          {{ attivita?.completato ? 'Segna come non completato' : 'Segna come completato' }}
+        </button>
+        <button type="submit" class="btn btn-success">Salva</button>
+        <button type="button" (click)="onClose()" class="btn btn-default">Chiudi</button>
+      </div>
+    </form>
+  </div>
+</div>

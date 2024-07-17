@@ -1,0 +1,25 @@
+<div class="cestino">
+  <div class="component-header">
+    <button (click)="tornaIndietro()" class="btn">
+      <i class="material-icons">arrow_back</i>
+    </button>
+    <h2>Cestino</h2>
+  </div>
+  <ul class="list">
+    <li *ngIf="!(cestino$ | async)?.length">Nessuna attività nel cestino</li>
+    <li *ngFor="let attivita of cestino$ | async" class="item">
+      <div class="item-details">
+        <span class="attivita-titolo">{{ attivita.titolo }}</span>
+        <span class="attivita-descrizione">{{ attivita.descrizione }}</span>
+      </div>
+      <div class="actions-container">
+        <button (click)="recuperaAttivita(attivita.id)" class="btn btn-action">
+          Recupera
+        </button>
+        <button (click)="rimuoviAttivitaPermanente(attivita.id)" class="btn btn-danger">
+          Elimina Permanentemente
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

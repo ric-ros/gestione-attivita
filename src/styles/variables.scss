@@ -1,0 +1,51 @@
+:root {
+  --background-color: #fff;
+  --text-color: #000;
+  --header-background-color: #f8f8f8;
+  --header-text-color: #333;
+  --nav-link-color: #333;
+  --modal-background-color: rgba(0, 0, 0, 0.5);
+  --modal-content-background-color: #fff;
+  --button-background-color: #e1e1e1;
+  --button-text-color: #000;
+  --button-action-background-color: #007bff;
+  --button-action-hover-background-color: #0056b3;
+  --button-danger-background-color: #dc3545;
+  --button-danger-hover-background-color: #c82333;
+  --button-success-background-color : #28a745;
+  --button-success-hover-background-color : #218838;
+  --task-background-color: #f9f9f9;
+  --task-hover-background-color: #f1f1f1;
+  --task-completed-background-color: #d4edda;
+  --filter-input-background-color: #fff;
+  --filter-input-text-color: #000;
+  --filter-input-border-color: #ddd;
+  --footer-background-color: #f8f8f8;
+  --footer-text-color: #000;
+}
+
+body.dark-mode {
+  --background-color: #333;
+  --text-color: #fff;
+  --header-background-color: #444;
+  --header-text-color: #fff;
+  --nav-link-color: #fff;
+  --modal-background-color: rgba(0, 0, 0, 0.5);
+  --modal-content-background-color: #555;
+  --button-background-color: #555;
+  --button-text-color: #fff;
+  --button-action-background-color: #007bff;
+  --button-action-hover-background-color: #0056b3;
+  --button-danger-background-color: #dc3545;
+  --button-danger-hover-background-color: #c82333;
+  --button-success-background-color : #28a745;
+  --button-success-hover-background-color : #218838;
+  --task-background-color: #444;
+  --task-hover-background-color: #555;
+  --task-completed-background-color: #3e8e41;
+  --filter-input-background-color: #555;
+  --filter-input-text-color: #fff;
+  --filter-input-border-color: #444;
+  --footer-background-color: #444;
+  --footer-text-color: #fff;
+}

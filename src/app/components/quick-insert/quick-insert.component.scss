@@ -1,0 +1,43 @@
+.quick-insert {
+  background-color: var(--background-color);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+
+  h2 {
+    margin-top: 0;
+    color: var(--text-color);
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid var(--filter-input-border-color);
+      border-radius: 4px;
+      background-color: var(--filter-input-background-color);
+      color: var(--filter-input-text-color);
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: var(--button-background-color);
+        outline: none;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+  }
+}

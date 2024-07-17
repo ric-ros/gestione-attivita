@@ -1,1 +1,130 @@
-/* You can add global styles to this file, and also import other style files */
+@import './styles/variables';
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.component-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.actions-container {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &.btn-default {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+
+    &:hover {
+      background-color: var(--button-hover-background-color);
+    }
+  }
+
+  &.btn-action {
+    background-color: var(--button-action-background-color);
+    color: white;
+
+    &:hover {
+      background-color: var(--button-action-hover-background-color);
+    }
+  }
+
+  &.btn-danger {
+    background-color: var(--button-danger-background-color);
+    color: white;
+
+    &:hover {
+      background-color: var(--button-danger-hover-background-color);
+    }
+  }
+
+  &.btn-success {
+    background-color: var(--button-success-background-color);
+    color: white;
+
+    &:hover {
+      background-color: var(--button-success-hover-background-color);
+    }
+  }
+}
+
+
+.list {
+  list-style-type: none;
+  padding: 0;
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid var(--filter-input-border-color);
+    margin-bottom: 10px;
+    background-color: var(--task-background-color);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--task-hover-background-color);
+    }
+
+    &.completata {
+      background-color: var(--task-completed-background-color);
+    }
+
+    .item-details {
+      display: flex;
+      flex-direction: column;
+
+      .item-titolo {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: var(--text-color);
+      }
+
+      .item-descrizione {
+        font-size: 14px;
+        color: var(--text-color);
+      }
+    }
+  }
+}
+
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  .filter-input,
+  .filter-select {
+    padding: 5px;
+    font-size: 14px;
+    background-color: var(--filter-input-background-color);
+    color: var(--filter-input-text-color);
+    border: 1px solid var(--filter-input-border-color);
+    border-radius: 4px;
+  }
+}
