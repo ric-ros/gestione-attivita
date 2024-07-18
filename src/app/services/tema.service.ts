@@ -9,6 +9,7 @@ export class TemaService {
 
   constructor() {
     this.caricaTema();
+    this.registraCambiamentoTemaDispositivo();
   }
 
   toggleDarkMode(): void {
@@ -27,11 +28,17 @@ export class TemaService {
   }
 
   caricaTema(): void {
-    const tema = localStorage.getItem('tema');
-    if (tema === 'scuro') {
-      document.documentElement.setAttribute('data-colore-tema', 'scuro');
+    // data-colore-tema è gestito per ora in index.html
 
-      this.isDarkMode$.next(true);
-    }
+    let darkMode: boolean = document.documentElement.getAttribute('data-colore-tema') === 'scuro';
+    this.isDarkMode$.next(darkMode);
+  }
+
+  registraCambiamentoTemaDispositivo(): void {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('tema') === null) {
+        document.documentElement.setAttribute('data-colore-tema', e.matches ? 'scuro' : 'chiaro');
+      }
+    });
   }
 }
