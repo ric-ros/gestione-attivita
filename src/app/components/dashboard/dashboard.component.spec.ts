@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DashboardComponent } from './dashboard.component';
+import { provideRouter } from '@angular/router';
+import { routes } from '../../app.routes';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,16 +9,17 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardComponent]
+      imports: [DashboardComponent],
+      providers: [provideRouter(routes)]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('crea il componente', () => {
     expect(component).toBeTruthy();
   });
 });

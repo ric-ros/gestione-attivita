@@ -7,8 +7,9 @@ import { Attivita } from '../models/attivita.model';
 })
 export class AttivitaService {
   private attivitaSubject = new BehaviorSubject<Attivita[]>(this.caricaAttivita());
-  attivita$: Observable<Attivita[]> = this.attivitaSubject.asObservable();
   private nextId = this.attivitaSubject.value.reduce((max, a) => a.id > max ? a.id : max, 0) + 1;
+
+  attivita$: Observable<Attivita[]> = this.attivitaSubject.asObservable();
 
   private salvaAttivita(attivita: Attivita[]): void {
     localStorage.setItem('attivita', JSON.stringify(attivita));
