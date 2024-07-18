@@ -7,6 +7,16 @@ body {
   margin: 0;
 }
 
+.vertical-divider::after {
+  content: '';
+  border-left: 1px solid var(--text-color-muted);
+  height: 100%;
+}
+
+.spacer {
+  flex: 1;
+}
+
 .component-header {
   display: flex;
   align-items: center;

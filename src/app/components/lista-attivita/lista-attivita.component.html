@@ -1,5 +1,7 @@
 <div class="lista-attivita">
-  <h2 class="component-header">Lista delle Attività {{ mostraSoltantoNonCompletate ? 'Non Completate' : '' }}</h2>
+  <div class="component-header">
+    <h2>Lista delle Attività {{ mostraSoltantoNonCompletate ? 'Non Completate' : '' }}</h2>
+  </div>
   <div class="filter-bar" *ngIf="!mostraSoltantoNonCompletate">
     <input (input)="onKeywordChange($event)" placeholder="Cerca..." class="filter-input" />
     <select (change)="onStatoChange($event)" class="filter-select">
@@ -15,7 +17,8 @@
       <div class="item-details">
         <span class="item-titolo">{{ attivita.titolo }}</span>
         <span class="item-descrizione">{{ attivita.descrizione }}</span>
-        <span class="item-data-creazione" [title]="attivita.creatoIl | date: 'dd MMM yyyy HH:mm'">Creato {{ attivita.creatoIl |
+        <span class="item-data-creazione" [title]="attivita.creatoIl | date: 'dd MMM yyyy HH:mm'">Creato {{
+          attivita.creatoIl |
           elapsedTime}}</span>
       </div>
       <div class="actions-container">

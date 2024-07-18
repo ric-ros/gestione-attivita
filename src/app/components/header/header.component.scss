@@ -9,8 +9,8 @@
   .container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
+    gap: 20px;
   }
 
   .title {
@@ -35,5 +35,9 @@
     text-decoration: none;
     color: var(--nav-link-color);
     font-size: 16px;
+
+    &:hover {
+      color: var(--nav-link-hover-color);
+    }
   }
 }

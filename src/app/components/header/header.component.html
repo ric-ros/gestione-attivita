@@ -1,12 +1,16 @@
 <div class="header">
   <div class="container">
-    <h1 class="title">Gestione Attività</h1>
-    <nav class="nav">
+    <a class="nav-link" routerLink="/">
+      <h1 class="title">Gestione Attività</h1>
+    </a>
+    <div class="vertical-divider"></div>
+    <nav>
       <ul class="nav-list">
         <li class="nav-item"><a routerLink="/" class="nav-link">Home</a></li>
         <li class="nav-item"><a routerLink="/lista-attivita" class="nav-link">Lista Attività</a></li>
       </ul>
     </nav>
+    <div class="spacer"></div>
     <button class="btn" (click)="toggleDarkMode()">
       <i class="material-icons">
         {{ (isDarkMode$ | async) ? 'brightness_7' : 'brightness_4' }}
