@@ -39,5 +39,9 @@
     &:hover {
       color: var(--nav-link-hover-color);
     }
+
+    &.active {
+      color: var(--nav-link-active-color);
+    }
   }
 }
