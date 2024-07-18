@@ -1,38 +1,34 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AttivitaService } from '../../services/attivita.service';
 import { Attivita } from '../../models/attivita.model';
 
 @Component({
   selector: 'app-quick-insert',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './quick-insert.component.html',
   styleUrls: ['./quick-insert.component.scss']
 })
 export class QuickInsertComponent {
-  nuovaAttivita: Partial<Attivita> = { titolo: '', descrizione: '', completato: false };
+  form: FormGroup;
 
-  constructor(private attivitaService: AttivitaService) { }
+  constructor(private formBuilder: FormBuilder, private attivitaService: AttivitaService) {
+    this.form = this.formBuilder.group({
+      titolo: ['', Validators.required],
+      // Forse possiamo anche aggiungere la validazione sui duplicati ma non so se ha senso per i task...
+      descrizione: [''],
+    });
+  }
 
-  onSubmit(form: HTMLFormElement) {
-    // Sarebbe il caso di usare Reactive Forms, ma per semplicità usiamo il metodo nativo
-    if (form.checkValidity() === false) {
-      form.reportValidity();
-      return
-    }
-
-    if (!this.nuovaAttivita.titolo) {
+  onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
 
-    const nuovaAttivitaCompleta: Attivita = {
-      ...this.nuovaAttivita,
-      id: 0  // ID verrà generato dal service
-    } as Attivita;
-
-    this.attivitaService.aggiungiAttivita(nuovaAttivitaCompleta);
-    this.nuovaAttivita = { titolo: '', descrizione: '', completato: false };
+    this.attivitaService.aggiungiAttivita(this.form.value as Partial<Attivita>);
+    this.form.reset();
   }
 }

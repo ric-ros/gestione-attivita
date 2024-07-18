@@ -1,15 +1,20 @@
 <div class="quick-insert">
-  <h2 class="component-header">Inserisci Nuova Attività</h2>
-  <form (ngSubmit)="onSubmit(form)" #form>
+  <div class="component-header">
+    <h2>Inserisci Nuova Attività</h2>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="titolo">Titolo:</label>
-      <input type="text" id="titolo" [(ngModel)]="nuovaAttivita.titolo" name="titolo" required>
+      <input type="text" id="titolo" formControlName="titolo" required>
+      <div *ngIf="form.get('titolo')?.invalid && form.get('titolo')?.touched">
+        <small class="text-danger">Il titolo è obbligatorio.</small>
+      </div>
     </div>
     <div class="form-group">
       <label for="descrizione">Descrizione:</label>
-      <textarea id="descrizione" [(ngModel)]="nuovaAttivita.descrizione" name="descrizione"></textarea>
+      <textarea id="descrizione" formControlName="descrizione"></textarea>
     </div>
-    <button type="submit" class="btn btn-action" [disabled]="!nuovaAttivita.titolo"
-      [title]="!nuovaAttivita.titolo ? 'Inserisci un titolo' : ''">Aggiungi Attività</button>
+    <button type="submit" class="btn btn-action" [disabled]="form.invalid"
+      [title]="form.invalid ? 'Inserisci un titolo' : ''">Aggiungi Attività</button>
   </form>
 </div>

@@ -19,11 +19,14 @@ export class AttivitaService {
     return attivita ? JSON.parse(attivita) : [];
   }
 
-  aggiungiAttivita(attivita: Attivita): void {
-    attivita.id = this.nextId++;
-    attivita.creatoIl = new Date();
-    attivita.cancellato = false;
-    const attivitaCorrenti = [...this.attivitaSubject.value, attivita];
+  aggiungiAttivita(attivita: Attivita | Partial<Attivita>): void {
+    const attivitaCompleta = {
+      ...attivita,
+      id: this.nextId++,
+      creatoIl: new Date()
+    } as Attivita;
+
+    const attivitaCorrenti = [...this.attivitaSubject.value, attivitaCompleta];
     this.attivitaSubject.next(attivitaCorrenti);
     this.salvaAttivita(attivitaCorrenti);
   }
